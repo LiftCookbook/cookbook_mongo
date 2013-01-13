@@ -15,10 +15,10 @@ seq(com.github.siasia.WebPlugin.webSettings :_*)
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 libraryDependencies ++= {
-  val liftVersion = "2.5-M3"
+  val liftVersion = "2.5-M4"
   Seq(
     "net.liftweb"       %% "lift-webkit"        % liftVersion        % "compile",
-    "net.liftmodules"   %% "lift-jquery-module" % (liftVersion + "-2.0"),
+    "net.liftmodules"   %% "lift-jquery-module" % (liftVersion + "-2.1"),
     "net.liftweb" %% "lift-mongodb-record" % liftVersion,
     "com.foursquare"  %% "rogue" % "1.1.8" intransitive(),
     "org.eclipse.jetty" % "jetty-webapp"        % "8.1.7.v20120910"  % "container,test",
