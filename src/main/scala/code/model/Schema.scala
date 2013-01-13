@@ -3,7 +3,8 @@ package model
 
 import net.liftweb.mongodb.record._
 import net.liftweb.mongodb.record.field._
-import net.liftweb.record.field.{IntField,StringField}
+import net.liftweb.record.field.{IntField, StringField}
+import com.foursquare.rogue.LatLong
 
 class Country private () extends MongoRecord[Country] with StringPk[Country] {
 
@@ -45,3 +46,20 @@ class Planet private() extends MongoRecord[Planet] with StringPk[Planet] {
 object Planet extends Planet with MongoMetaRecord[Planet] {
   override def collectionName = "example.planet"
 }
+
+
+class City private () extends MongoRecord[City] with ObjectIdPk[City] {
+  override def meta = City
+
+  object name extends StringField(this, 60)
+
+  object loc extends MongoCaseClassField[City, LatLong](this)
+}
+
+object City extends City with MongoMetaRecord[City] {
+  import net.liftweb.mongodb.BsonDSL._
+  ensureIndex(loc.name -> "2d", unique=true)
+
+  override def collectionName = "example.city"
+}
+
