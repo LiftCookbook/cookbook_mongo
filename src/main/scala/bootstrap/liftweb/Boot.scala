@@ -13,6 +13,7 @@ import java.net.URI
 import com.mongodb.{ServerAddress, Mongo}
 
 
+
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
@@ -63,10 +64,15 @@ class Boot {
 
     MongoUrl.defineDb(DefaultMongoIdentifier, "mongodb://127.0.0.1:27017/cookbook")
 
+    //MongoUrl.defineDb(OtherMongoIdentifier, "mongodb://127.0.0.1:27017/other")
+
   }
 
 }
 
+//object OtherMongoIdentifier extends MongoIdentifier {
+//  def jndiName: String = "other"
+//}
 
 
 object MongoUrl {

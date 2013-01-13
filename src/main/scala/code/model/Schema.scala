@@ -13,4 +13,5 @@ class Country private () extends MongoRecord[Country] with StringPk[Country] {
 
 object Country extends Country with MongoMetaRecord[Country] {
   override def collectionName = "example.earth"
+ // override def mongoIdentifier = bootstrap.liftweb.OtherMongoIdentifier
 }
