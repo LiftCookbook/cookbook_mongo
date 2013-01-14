@@ -28,7 +28,7 @@ class GeoSnippet {
 
 
   val centre = london.loc.is
-  val radius = Degrees( (1000 / 6378.137).toDegrees )
+  val radius = Degrees( (500 / 6378.137).toDegrees )
 
   def near = "#cities" #> (
     for (city <- City.where( _.loc near (centre.lat ,centre.long, radius) ).fetch()) yield
