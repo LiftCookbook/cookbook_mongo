@@ -3,7 +3,7 @@ package model
 
 import net.liftweb.mongodb.record._
 import net.liftweb.mongodb.record.field._
-import net.liftweb.record.field.{IntField, StringField}
+import net.liftweb.record.field.{EnumNameField, IntField, StringField}
 import com.foursquare.rogue.LatLong
 
 class Country private () extends MongoRecord[Country] with StringPk[Country] {
@@ -61,5 +61,19 @@ object City extends City with MongoMetaRecord[City] {
   ensureIndex(loc.name -> "2d", unique=true)
 
   override def collectionName = "example.city"
+}
+
+
+object DayOfWeek extends Enumeration {
+  type DayOfWeek = Value
+  val Mon, Tue, Wed, Thu, Fri, Sat, Sun = Value
+}
+
+class Birthday private () extends MongoRecord[Birthday] with StringPk[Birthday] {
+  override def meta = Birthday
+  object dow extends EnumNameField(this, DayOfWeek)
+}
+
+object Birthday extends Birthday with MongoMetaRecord[Birthday] {
 }
 

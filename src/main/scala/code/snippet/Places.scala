@@ -7,8 +7,6 @@ import net.liftweb.util.Helpers._
 
 class Places {
 
-
-
   lazy val uk = Country.find("uk") openOr {
 
     val info = Map(
