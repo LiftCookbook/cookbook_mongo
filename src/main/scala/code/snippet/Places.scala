@@ -7,19 +7,20 @@ import net.liftweb.util.Helpers._
 
 class Places {
 
-  lazy val uk = Country.find("uk") openOr {
+  lazy val uk : Country =
+    Country.find("uk") openOr {
 
-    val info = Map(
-      "Brighton" -> 134293,
-      "Birmingham" -> 970892,
-      "Liverpool" -> 469017)
+      val info = Map(
+        "Brighton" -> 134293,
+        "Birmingham" -> 970892,
+        "Liverpool" -> 469017)
 
-    val unionJack =
-      Image.createRecord.url("http://bit.ly/unionflag200").width(200).height(100)
+      val unionJack =
+        Image.createRecord.url("http://bit.ly/unionflag200").width(200).height(100)
 
-    val earth = Planet.createRecord.id("earth").review("Harmless").save
+      val earth = Planet.createRecord.id("earth").review("Harmless").save
 
-    Country.createRecord.id("uk").population(info).planet(earth.id.is).flag(unionJack).save
+     Country.createRecord.id("uk").population(info).planet(earth.id.is).flag(unionJack).save
   }
 
 
