@@ -15,12 +15,26 @@ class Places {
         "Birmingham" -> 970892,
         "Liverpool" -> 469017)
 
+      // An embedded document:
       val unionJack =
         Image.createRecord.url("http://bit.ly/unionflag200").width(200).height(100)
 
+      // Another document we will reference:
       val earth = Planet.createRecord.id("earth").review("Harmless").save
 
-     Country.createRecord.id("uk").population(info).planet(earth.id.is).flag(unionJack).save
+      // A list of embedded documents:
+      val meals =
+        Food.createRecord.name("Fish & Chips") ::
+        Food.createRecord.name("Cream Tea") ::
+        Food.createRecord.name("Roast Beef") ::
+        Nil
+
+      Country.createRecord.id("uk").
+        population(info).
+        planet(earth.id.is).
+        flag(unionJack).
+        foods(meals).
+        save
   }
 
 

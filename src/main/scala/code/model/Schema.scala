@@ -10,21 +10,34 @@ class Country private () extends MongoRecord[Country] with StringPk[Country] {
 
   override def meta = Country
 
+  // A Map:
   object population extends MongoMapField[Country,Int](this) {
    // override def optional_? = true
   }
 
+  // An embedded document:
   object flag extends BsonRecordField(this, Image)
 
+  // An embedded list:
+  object foods extends BsonRecordListField(this, Food)
+
+  // A reference to another document:
   object planet extends StringRefField(this, Planet, 128)
 
 }
 
 object Country extends Country with MongoMetaRecord[Country] {
   override def collectionName = "example.earth"
- // override def mongoIdentifier = bootstrap.liftweb.OtherMongoIdentifier
+  // If you used an alternative Mongo connection name:
+  // override def mongoIdentifier = bootstrap.liftweb.OtherMongoIdentifier
 }
 
+class Food private () extends BsonRecord[Food] {
+  def meta = Food
+  object name extends StringField(this, 1024)
+}
+
+object Food extends Food with BsonMetaRecord[Food]
 
 
 class Image private () extends BsonRecord[Image] {
