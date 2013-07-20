@@ -3,12 +3,14 @@ package snippet
 
 import model._
 
-import com.foursquare.rogue.Rogue._
+import scala.language.reflectiveCalls
+import scala.language.implicitConversions
+
+import com.foursquare.rogue.LiftRogue._
 import com.foursquare.rogue.{LatLong, Degrees}
 import net.liftweb.util.Helpers._
 
 class GeoSnippet {
-
 
   implicit def string2city(name: String) = new {
     def at(ll: (Double,Double)) = {

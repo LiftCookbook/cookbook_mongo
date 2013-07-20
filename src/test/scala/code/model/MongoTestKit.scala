@@ -4,10 +4,12 @@ import net.liftweb.http.{Req, S, LiftSession}
 import net.liftweb.util.StringHelpers
 import net.liftweb.common.Empty
 import net.liftweb.mongodb._
+
 import com.mongodb.ServerAddress
 import com.mongodb.Mongo
+
 import org.specs2.mutable.Around
-import org.specs2.execute.Result
+import org.specs2.execute.{AsResult, ResultExecution, Result}
 
 trait MongoTestKit {
 
@@ -30,11 +32,11 @@ trait MongoTestKit {
   }
 
   object MongoContext extends Around with TestLiftSession {
-    def around[T <% Result](testToRun: =>T) = {
+    def around[T : AsResult](testToRun: =>T) : Result = {
       initDb()
       try {
         inSession {
-          testToRun
+          ResultExecution.execute(AsResult(testToRun))
         }
       } finally {
         destroyDb()
